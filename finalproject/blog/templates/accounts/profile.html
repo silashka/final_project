@@ -1,0 +1,25 @@
+{% extends 'blog/base.html' %}
+{% block title %}ProfilePage{% endblock %}
+{% block content %}
+    <h1 class="profile">Profile Page</h1>
+    <p>Welcome to your profile, {{ user.username }}</p>
+    <ul>
+        <li>Username: {{ user.username }}</li>
+        <li>First name: {{ user.first_name }}</li>
+        <li>Last name: {{ user.last_name }}</li>
+        <li>Birth Date: {{ user.userprofile.birth_date }}</li>    # не сохраняется пока что, все делается)
+        <li>Bio: {{ user.userprofile.bio }}</li>
+        <li>Location: {{ user.userprofile.location }}</li>
+        <li>Phone: {{ user.userprofile.user_phone}}</li>
+        <li>Email: {{ user.userprofile.email}}</li>
+    </ul>
+
+
+    <div class="profile_edit">
+            <form method="post" action="{% url 'profile_edit' user.id %}">
+                {% csrf_token %}
+            <p><input type="submit" value="Edit profile"></p>
+            </form>
+        </div>
+
+{% endblock %}

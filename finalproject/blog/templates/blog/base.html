@@ -1,0 +1,75 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="{% static 'css/blog.css' %}" rel="stylesheet">
+    <title>{% block title %}{% endblock %}</title>
+
+</head>
+<body>
+<div class="login">
+    {% if not  user.is_authenticated %}
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'register' %}">Sign up</a>
+    {% else %}
+        <div class="page-header">Hello, <a href="{% url 'profile' %}">{{ user.username }}</a></div>
+        <div class="logout-form">
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+            <input type="hidden" name="prev_page" value="{{ request.path }}"/>
+            <p><input type="submit" value="Logout"></p>
+            </form>
+        </div>
+        <div class="post_new">
+            <form method="post" action="{% url 'post_new' %}">
+                {% csrf_token %}
+            <p><input type="submit" value="Add post"></p>
+            </form>
+
+        </div>
+
+    {% endif %}
+
+</div>
+<header>
+    <p class="page-title">
+        <a href="{% url 'index' %}">Frisbee Time</a>
+    </p>
+    <nav class="blog-navigation">
+        <div class="links">
+            <a href="{% url 'index' %}">The Blog</a>
+            <a href=""></a>
+            <a href=""></a>
+            <a href="{% url 'disciplines' %}">Disciplines</a>
+            <a href="{% url 'history' %}">History</a>
+            <a href=""></a>
+
+        </div>
+
+      </nav>
+
+
+  </header>
+<div id="content">
+    {% block content %}
+
+    {% endblock %}
+</div>
+
+{#<div class="partnership">#}
+{#    <p>Тут могла быть ваша реклама</p>#}
+{#</div>#}
+
+{#<div id="footer">#}
+{#    <a href="">О проекте</a>#}
+{#    <a href=""></a>#}
+{#    <a href=""></a>#}
+{#</div>#}
+
+</body>
+</html>
+

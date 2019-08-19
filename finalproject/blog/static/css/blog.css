@@ -1,0 +1,86 @@
+body {
+    padding: 0 30px;
+    font-size: 16px;
+    line-height: 26px;
+    font-family: "Arial", sans-serif;
+    color: #222222;
+}
+
+div a {
+    margin: 0 20px;
+}
+
+.blog-navigation {
+    margin-bottom: 30px;
+    padding: 20px;
+    color: #ffffff;
+    background-color: #7FFFD4;
+    border: 2px solid #2d508f;
+}
+.login{
+    text-align: right;
+
+}
+
+.login-form ,
+.login-form p,
+.welcome,
+.register{
+    text-align: center;
+}
+
+
+.blog{
+    font-size: 36px;
+    text-align: center;
+    color: #2d508f;
+}
+.page-title {
+    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+    font-weight: bold;
+    font-size: 50px;
+    /*line-height: 42px;*/
+    text-align: center;
+}
+
+.post_title{
+    text-align: center;
+    font-size: 50px;
+
+
+}
+/*.post {*/
+/*    width: 25%;*/
+/*    background: #ccc;*/
+/*    padding: 5px;*/
+/*    padding-right: 20px;*/
+/*    border: solid 1px black;*/
+/*    float: left;*/
+/*    display: inline-block;*/
+/*    margin: 20px;*/
+/*}*/
+
+/*.partnership{*/
+/*    font-family: Bradley Hand, cursive;*/
+/*    margin: 30px;*/
+/*    padding: 30px;*/
+/*    left: 0;*/
+/*    bottom: 0;*/
+/*    text-align: center;*/
+/*    color: #ffffff;*/
+/*    background-color: #40E0D0;*/
+/*    position: fixed;.*/
+
+/*}*/
+
+
+#footer {
+    position: fixed;
+    text-align: right;
+    left: 0;
+    bottom: 0;
+    padding: 10px;
+    background: #7FFFD4;
+    color: #fff;
+    width: 100%;
+}

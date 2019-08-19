@@ -1,0 +1,48 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Edit your account{% endblock %}
+
+{% block content %}
+
+     <form method="POST">
+        {% csrf_token %}
+        <p>
+            <label>Username</label><br>
+            <input type="text" name="name" value="{{user.username}}" />
+        </p>
+         <p>
+            <label>First Name</label><br>
+            <input type="text" name="first_name" value="{{user.first_name}}" />
+        </p>
+         <p>
+            <label>Last name</label><br>
+            <input type="text" name="last_name" value="{{user.last_name}}" />
+         </p>
+         <p>
+            <label>Birth date</label><br>
+            <input type="date" name="bd" value="{{user.userprofile.birth_date}}" />
+        </p>
+         <p>
+            <label>Bio</label><br>
+            <input type="text" name="bio" value="{{user.userprofile.bio}}" />
+        </p>
+         <p>
+            <label>Location</label><br>
+            <input type="text" name="bd" value="{{user.userprofile.location}}" />
+        </p>
+         <p>
+            <label>Phone</label><br>
+            <input type="tel" name="phone" value="{{user.userprofile.user_phone}}" />
+        </p>
+
+        <p>
+            <label>Email</label><br>
+            <input type="email" name="email" value="{{userprofile.email}}" />
+        </p>
+
+
+        <input type="submit" value="Save" >
+    </form>
+
+{% endblock %}
+

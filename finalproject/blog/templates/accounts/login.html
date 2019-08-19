@@ -1,0 +1,26 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Log-in{% endblock %}
+{% block content %}
+    <h1 class="login-form">Login</h1>
+    {% if form.errors %}
+        <p style="color:red; text-align: center;">
+            Your username and password didn't match.
+            Please try again.
+        </p>
+    {% else %}
+        <p class="login-form">Please, use the following form to login:</p>
+    {% endif %}
+    <div class="login-form">
+        <form action="{% url 'login' %}" method="post" novalidate>
+            {{ form.as_p }}
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ next }}"/>
+            <p><input type="submit" value="Login"></p> or
+{#            <button type="submit" class="btn btn-success" value="{%url 'register'%}">Save person</button>#}
+            <a href="{% url 'register' %}">Sign up</a>
+        </form>
+
+{#    <p><a href="">Forgotten your password?</a></p>#}
+    </div>
+{% endblock %}
