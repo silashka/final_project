@@ -3,46 +3,55 @@
 {% block title %}Edit your account{% endblock %}
 
 {% block content %}
+    <div class="container">
+        <form action="." method="POST" class="container" style="padding-top: 40px;">
+            {% csrf_token %}
+            <p>
+                <label>Username<br/>
+                <input type="text" name="username" value="{{user.username}}" />
+                </label>
+            </p>
+             <p>
+                <label>First Name<br/>
+                <input type="text" name="first_name" value="{{user_profile.first_name}}" />
+                </label>
+            </p>
+             <p>
+                <label>Last name<br/>
+                <input type="text" name="last_name" value="{{user_profile.last_name}}" />
+                </label>
+             </p>
+             <p>
+                <label>Birth date<br/>
+                <input type="date" name="birth_date" value="{{user_profile.birth_date}}" />
+                </label>
+            </p>
+             <p>
+                <label>City<br/>
+                <input type="text" name="city" value="{{user_profile.city}}" />
+                </label>
+            </p>
+             <p>
+                <label>Phone<br/>
+                <input type="tel" name="user_phone" value="{{user_profile.user_phone}}" />
+                </label>
+            </p>
 
-     <form method="POST">
-        {% csrf_token %}
-        <p>
-            <label>Username</label><br>
-            <input type="text" name="name" value="{{user.username}}" />
-        </p>
-         <p>
-            <label>First Name</label><br>
-            <input type="text" name="first_name" value="{{user.first_name}}" />
-        </p>
-         <p>
-            <label>Last name</label><br>
-            <input type="text" name="last_name" value="{{user.last_name}}" />
-         </p>
-         <p>
-            <label>Birth date</label><br>
-            <input type="date" name="bd" value="{{user.userprofile.birth_date}}" />
-        </p>
-         <p>
-            <label>Bio</label><br>
-            <input type="text" name="bio" value="{{user.userprofile.bio}}" />
-        </p>
-         <p>
-            <label>Location</label><br>
-            <input type="text" name="bd" value="{{user.userprofile.location}}" />
-        </p>
-         <p>
-            <label>Phone</label><br>
-            <input type="tel" name="phone" value="{{user.userprofile.user_phone}}" />
-        </p>
+            <p>
+                <label>Email<br/>
+                <input type="email" name="email" value="{{user_profile.email}}" />
+                </label>
+            </p>
 
-        <p>
-            <label>Email</label><br>
-            <input type="email" name="email" value="{{userprofile.email}}" />
-        </p>
+            <p><button type="submit" class="btn btn-sm btn-primary">Save</button></p>
+        </form>
 
-
-        <input type="submit" value="Save" >
-    </form>
+{#    <form method="post" action="{% url 'change_password' %}">#}
+{#        {% csrf_token %}#}
+{#        <p><button type="submit" class="btn btn-sm btn-primary">Change password</button></p>#}
+{##}
+{#    </form>#}
+    </div>
 
 {% endblock %}
 

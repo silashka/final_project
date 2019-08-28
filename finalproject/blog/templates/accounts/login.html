@@ -2,25 +2,31 @@
 
 {% block title %}Log-in{% endblock %}
 {% block content %}
-    <h1 class="login-form">Login</h1>
-    {% if form.errors %}
-        <p style="color:red; text-align: center;">
-            Your username and password didn't match.
-            Please try again.
-        </p>
-    {% else %}
-        <p class="login-form">Please, use the following form to login:</p>
-    {% endif %}
-    <div class="login-form">
-        <form action="{% url 'login' %}" method="post" novalidate>
-            {{ form.as_p }}
+    <div class="container">
+    <h2 class="text-center" style="font-size: 30px; padding-top: 20px;">Login</h2>
+        <form action="{% url 'login' %}" method="post" novalidate style="width: 40%;" class="mx-auto" >
             {% csrf_token %}
-            <input type="hidden" name="next" value="{{ next }}"/>
-            <p><input type="submit" value="Login"></p> or
-{#            <button type="submit" class="btn btn-success" value="{%url 'register'%}">Save person</button>#}
-            <a href="{% url 'register' %}">Sign up</a>
-        </form>
+            {% if form.errors %}
+                <p style="color:red; text-align: center;">
+                Your username/password didn't match.<br/> Please try again.
+                </p>
+            {% else %}
+                <p class="form-group text-center" style="font-size: 25px;">Welcome ;)</p>
+            {% endif %}
+            <div class="form-group">
+                <label for="username" style="font-size: 20px;">Username:</label>
+                <input type="text" class="form-control" id="username" style=" font-size: 20px;" placeholder="Enter username"
+                       name="username">
+                <label for="password" style=" font-size: 20px;">Password:</label>
+                <input type="password" class="form-control" id="password" style=" font-size: 20px;"
+                       placeholder="Enter password" name="password">
+            </div>
+            <div class="form-group text-center">
+                <input type="hidden" name="next" value="{{ next }}">
+                <p><button type="submit" class="btn btn-sm btn-primary">Log In</button></p>
+                <p style="font-size: 18px;">Don’t have an account? <a href="{% url 'register' %}">Sign up now</a></p>
 
-{#    <p><a href="">Forgotten your password?</a></p>#}
+            </div>
+        </form>
     </div>
 {% endblock %}

@@ -6,70 +6,177 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="{% static 'css/blog.css' %}" rel="stylesheet">
-    <title>{% block title %}{% endblock %}</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>tinymce.init({selector:'textarea'});</script>
 
+    <style>
+
+        h1{
+            font-size: 90px;
+            font-family: Andale Mono, monospace;
+        }
+        h2{
+            font-size: 60px;
+            font-family: Trattatello, fantasy;
+        }
+        .carousel-inner img{
+            {#width: 100%;#}
+            height: 100%;
+            min-width: 100%;
+            max-width: none !important;
+        }
+        .carousel-inner {
+            max-height: 600px;
+        }
+
+    </style>
+    <title>Frisbee Time</title>
 </head>
 <body>
-<div class="login">
-    {% if not  user.is_authenticated %}
-        <a href="{% url 'login' %}">Login</a>
-        <a href="{% url 'register' %}">Sign up</a>
-    {% else %}
-        <div class="page-header">Hello, <a href="{% url 'profile' %}">{{ user.username }}</a></div>
-        <div class="logout-form">
-            <form method="post" action="{% url 'logout' %}">
-                {% csrf_token %}
-            <input type="hidden" name="prev_page" value="{{ request.path }}"/>
-            <p><input type="submit" value="Logout"></p>
-            </form>
-        </div>
-        <div class="post_new">
-            <form method="post" action="{% url 'post_new' %}">
-                {% csrf_token %}
-            <p><input type="submit" value="Add post"></p>
-            </form>
-
-        </div>
-
-    {% endif %}
-
-</div>
 <header>
-    <p class="page-title">
-        <a href="{% url 'index' %}">Frisbee Time</a>
-    </p>
-    <nav class="blog-navigation">
-        <div class="links">
-            <a href="{% url 'index' %}">The Blog</a>
-            <a href=""></a>
-            <a href=""></a>
-            <a href="{% url 'disciplines' %}">Disciplines</a>
-            <a href="{% url 'history' %}">History</a>
-            <a href=""></a>
+        <div class="container-fluid carousel slide" id="myCarousel" data-ride="carousel" style="padding: 0; margin: 0;">
+            <ul class="carousel-indicators">
+                <li data-target="#myCarousel" class="item1 active"></li>
+                <li data-target="#myCarousel" class="item2"></li>
+                <li data-target="#myCarousel" class="item3"></li>
+                <li data-target="#myCarousel" class="item4"></li>
+                <li data-target="#myCarousel" class="item5"></li>
+                <li data-target="#myCarousel" class="item6"></li>
+             </ul>
+            <div class="carousel-inner" style="height:50%;">
+                  <div class="carousel-item active">
+                      <img src="/media/images/cor1.jpg" alt="frisbee">
+                      <div class="carousel-caption">
+                          <h1>Frisbee Time</h1>
+                      </div>
+                  </div>
+                  <div class="carousel-item">
+                      <img src="/media/images/corr.jpg" alt="frisbee2">
+                      <div class="carousel-caption text-dark">
+                          <h1>Frisbee Time</h1>
+                      </div>
+                  </div>
+                  <div class="carousel-item">
+                      <img src="/media/images/cor2.jpg" alt="frisbee3">
+                      <div class="carousel-caption">
+                          <h1>Frisbee Time</h1>
+                      </div>
+                  </div>
+                  <div class="carousel-item">
+                      <img src="/media/images/coru.jpg" alt="frisbee4">
+                      <div class="carousel-caption">
+                          <h1>Frisbee Time</h1>
+                      </div>
+                  </div>
+                  <div class="carousel-item">
+                      <img src="/media/images/coru1.jpg" alt="frisbee5">
+                      <div class="carousel-caption">
+                          <h1>Frisbee Time</h1>
+                      </div>
+                  </div>
+                  <div class="carousel-item">
+                      <img src="/media/images/corru.jpg" alt="frisbee6">
+                      <div class="carousel-caption">
+                          <h1>Frisbee Time</h1>
+                      </div>
+                  </div>
+            </div>
 
+            <a class="carousel-control-prev" href="#myCarousel">
+                <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class="carousel-control-next" href="#myCarousel">
+                <span class="carousel-control-next-icon"></span>
+            </a>
         </div>
-
-      </nav>
-
-
-  </header>
+</header>
+<nav class="navbar navbar-expand-sm bg-info navbar-dark sticky-top">
+    <a class="navbar-brand" href="{% url 'index' %}" data-toggle="tooltip" title="Home">The Blog</a>
+    <button class="navbar-toggler" data-toggle="collapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'disciplines' %}">Disciplines</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'history' %}">History</a>
+            </li>
+             <li class="nav-item">
+                  <a class="nav-link" ></a>
+             </li>
+        </ul>
+    </div>
+    <div class="justify-content-center navbar-dark">
+        {% if not  user.is_authenticated %}
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Log In</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'register' %}">Sign Up</a>
+                </li>
+            </ul>
+        {% else %}
+           <ul class="navbar-nav">
+               <li class="nav-item">
+                   <a class="nav-link" href="{% url 'profile' %}" data-toggle="tooltip" title="my profile">Hello, {{ user.username }}! </a>
+               </li>
+               <li class="nav-item">
+                   <form class="form-inline" method="post" action="{% url 'logout' %}">
+                       {% csrf_token %}
+                           <input type="hidden" name="prev_page" value="{{ request.path }}">
+                           <input type="submit" class="btn" value="Logout">
+                   </form>
+               </li>
+               <li class="nav-item">
+                    <form class="form-inline" method="post" action="{% url 'post_new' %}">
+                        {% csrf_token %}
+                        <input type="submit" class="btn" value="Add post">
+                    </form>
+               </li>
+            </ul>
+        {% endif %}
+    </div>
+</nav>
 <div id="content">
     {% block content %}
-
     {% endblock %}
 </div>
 
-{#<div class="partnership">#}
-{#    <p>Тут могла быть ваша реклама</p>#}
-{#</div>#}
+<script>
+$(document).ready(function(){
 
-{#<div id="footer">#}
-{#    <a href="">О проекте</a>#}
-{#    <a href=""></a>#}
-{#    <a href=""></a>#}
-{#</div>#}
+    $("#myCarousel").carousel();
 
+    $(".item1").click(function(){
+        $("#myCarousel").carousel(0);
+    });
+    $(".item2").click(function(){
+        $("#myCarousel").carousel(1);
+    });
+    $(".item3").click(function(){
+        $("#myCarousel").carousel(2);
+    });
+
+
+    $(".carousel-control-prev").click(function(){
+        $("#myCarousel").carousel("prev");
+    });
+    $(".carousel-control-next").click(function(){
+        $("#myCarousel").carousel("next");
+    });
+});
+</script>
+
+
+<div id="footer" class="text-right " style="color: blue; font-size: 18px; margin-bottom: 0">
+  <p></p>
+</div>
 </body>
 </html>
 

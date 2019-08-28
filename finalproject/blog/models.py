@@ -27,31 +27,44 @@ class UserProfile(models.Model):
         ('M', 'Male'),
         ('F', 'Female'),
     )
-
-    user = models.OneToOneField(DjangoUser, on_delete=models.CASCADE)
-    bio = models.TextField(max_length=500, blank=True, null=True)
-    gender = models.CharField(max_length=1, choices=GENDER_CHOICES, null=True, blank=True)
+    first_name = models.TextField(max_length=30, null=True, blank=True)
+    last_name = models.TextField(max_length=30, null=True, blank=True)
+    user = models.OneToOneField(DjangoUser, on_delete=models.CASCADE, related_name='profile')
     user_phone = models.CharField(max_length=140, blank=True, null=True)
-    location = models.CharField(max_length=30, blank=True, null=True)
+    city = models.CharField(max_length=30, blank=True, null=True)
     birth_date = models.DateField(null=True, blank=True)
     email = models.EmailField(unique=True, null=True, blank=True)
 
-    class Meta:
-        verbose_name = 'User profile'
-        verbose_name_plural = 'User profiles'
-
     def __str__(self):
-        return 'Profile for user {}'.format(self.user.username)
+        return self.user.username
 
 
 class Post(models.Model):
     title = models.CharField(max_length=191, null=False, blank=False)
     description = models.TextField(max_length=191, null=True, blank=True)
     body = models.TextField(null=False, blank=False)
-    image = models.FileField(null=True, blank=True)
+    image = models.ImageField(upload_to='blog/%Y/%m/%d', null=True, blank=True)
     user = models.ForeignKey(DjangoUser, related_name='blog_posts', on_delete=models.CASCADE)
     published = models.DateTimeField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        ordering = ['-published',]
+
+
+
+
+# class Comment(models.Model):
+#     user = models.ForeignKey(DjangoUser)
+#     post = models.ForeignKey(Post)
+#     body = models.TextField()
+#     created = models.DateTimeField(auto_now_add=True)
+#
+#     class Meta:
+#         ordering = ('created',)
+#
+#     def __str__(self):
+#         return 'Comment by {} on {}'.format(self.username, self.post)

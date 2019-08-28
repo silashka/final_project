@@ -23,5 +23,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # path('account/', include('blog.urls'))
 ]
-if settings.DEBUG:   # сервер разработки джанго будет отвечать за службу мультимедийных файлов во время разработки
+if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

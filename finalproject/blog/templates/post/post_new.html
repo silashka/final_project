@@ -1,14 +1,17 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-    <h1>New post</h1>
-    <form method="post" class="post-form">
-        {% csrf_token %}
-        <table class="form-table">
-        {{ form.as_table }}
-        </table>
+    <div style="padding-top: 40px; font-size: 20px;">
+        <h1 class="text-center" style="font-size: 40px">New post</h1>
+        <form method="POST" class="container" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for field in form %}
+                <p><label class="font-weight-bold" for={{field.name}}>{{field.label}}</label></p>
+                <p>{{field}}</p>
+            {% endfor %}
+        <button type="submit" class="btn btn-sm bg-warning text-white">Save</button>
 
-        <button type="submit" class="save btn btn-default">Save</button>
-    </form>
+        </form>
+    </div>
 
 {% endblock %}

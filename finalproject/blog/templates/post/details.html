@@ -1,26 +1,31 @@
 {% extends 'blog/base.html' %}
 {% block title %}{{ post.title }}{% endblock %}
 {% block content %}
-    <h1  class="post_title">{{ post.title }}</h1>
-    <p class="date">
-    {{ post.body }}
-    </p>
-    Published {{ post.published }} by {{ post.user }}
+    <div class="container" style="margin-top:30px;">
+        <h2  class="text-center" style="font-size: 55px;">{{ post.title }}</h2>
+            <div style="font-size: 20px; text-indent: 1.5em; text-align: justify;">
+                <p>{{ post.body | safe}}</p>
+                    <div class="media-body">
+                        {% if post.image %}
+                            <p><img class="rounded mx-auto d-block" width="80%" height="80%" src="{{ post.image.url }}"
+                                    alt="image"></p>
+                        {% else %}
+                            <p></p>
+                        {% endif %}
+                        <p class="text-right text-info font-italic">Published {{ post.published }} by {{ post.user }}</p>
+                    </div>
+
+            </div>
 
     {% if user.is_authenticated and post.user.id == user.id %}
         <div class="post_edit">
             <form action="{% url 'post_edit' post.id %}">
                 {% csrf_token %}
-            <p><input type="submit" value="Edit post"></p>
+                    <button type="submit" class="btn btn-sm btn-primary">Edit post</button>
             </form>
         </div>
-
-        <form method="post" action="{% url 'post_delete' post.id %}">
-                {% csrf_token %}
-            <p><input type="submit" value="Delete post"></p>
-        </form>
-
     {% endif %}
+    </div>
 {% endblock %}
 
 

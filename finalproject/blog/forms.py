@@ -27,21 +27,18 @@ class RegistrationForm(forms.ModelForm):
 class UserProfileForm(forms.ModelForm):
     first_name = forms.CharField(max_length=20)
     last_name = forms.CharField(max_length=20)
+    email = forms.EmailField(required=True)
+    birth_date = forms.DateField(required=False)
+    city = forms.CharField(required=False)
+    user_phone = forms.CharField(max_length=14, required=False)
 
     class Meta:
         model = UserProfile
-        fields = ('first_name', 'last_name', 'bio', 'birth_date', 'location', 'user_phone', 'email')
-        widgets = {'phone': forms.TextInput()}
-
-    def save(self, user=None):
-        user_profile = super(UserProfileForm, self).save(commit=False)
-        if user:
-            user_profile.user = user
-        user_profile.save()
-        return user_profile
+        fields = ('first_name', 'last_name', 'email', 'birth_date', 'user_phone', 'city')
 
 
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('title', 'description', 'body', 'image',)
+

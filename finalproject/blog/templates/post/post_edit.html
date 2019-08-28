@@ -1,14 +1,43 @@
 {% extends 'blog/base.html' %}
-
+{% block title %}Edit post{% endblock %}
 {% block content %}
-    <h1>Edit post</h1>
-    <form method="POST" class="post-form" action="{% url 'post_edit' post.id %}">
-        {% csrf_token %}
-        <table class="form-table">
-        {{ form.as_table }}
-        </table>
+    <div style="padding-top: 40px; font-size: 20px;">
+        <h1 class="text-center" style="font-size: 40px">Edit post</h1>
+        <form method="POST" class="container" action="{% url 'post_edit' post.id %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for field in form %}
+                <p><label class="font-weight-bold" for={{field.name}}>{{field.label}}</label></p>
+                <p>{{field}}</p>
+            {% endfor %}
+            <div class="btn-group btn-group-sm">
+                <button type="button" class="btn btn-sm bg-danger text-white" data-toggle="modal"
+                   data-target="#myModal">Delete</button>
+                <button type="submit" class="btn btn-sm bg-warning text-white">Save</button>
+            </div>
+        </form>
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                  <div class="modal-body text-center">
+                      <p>Delete this post?</p>
+                  </div>
+                  <div class="modal-footer " style="justify-content: center">
+                      <form method="POST" action="{% url 'post_delete' post.id %}">
+                          {% csrf_token %}
+                          <button type="submit" class="btn btn-sm btn-danger">Yes</button>
+                          <button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">No</button>
+                      </form>
+                  </div>
+              </div>
+        </div>
+  </div>
 
-        <button type="submit" class="save btn btn-default">Save</button>
-    </form>
+<script>
+    $(document).ready(function(){
+        $('#delete').click(function(){
+            $('#delModal').modal('show');
+        });
+    });
+</script>
 
 {% endblock %}

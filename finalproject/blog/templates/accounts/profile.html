@@ -1,25 +1,47 @@
 {% extends 'blog/base.html' %}
 {% block title %}ProfilePage{% endblock %}
 {% block content %}
-    <h1 class="profile">Profile Page</h1>
-    <p>Welcome to your profile, {{ user.username }}</p>
-    <ul>
-        <li>Username: {{ user.username }}</li>
-        <li>First name: {{ user.first_name }}</li>
-        <li>Last name: {{ user.last_name }}</li>
-        <li>Birth Date: {{ user.userprofile.birth_date }}</li>    # не сохраняется пока что, все делается)
-        <li>Bio: {{ user.userprofile.bio }}</li>
-        <li>Location: {{ user.userprofile.location }}</li>
-        <li>Phone: {{ user.userprofile.user_phone}}</li>
-        <li>Email: {{ user.userprofile.email}}</li>
-    </ul>
+    <div class="container" style="padding-top: 60px;">
+        <h2 class="profile container " style="font-size: 40px;">my profile</h2>
+            <table class="table table-striped table-bordered table-sm" style="width: 50%;" >
+                <tbody>
+                    <tr>
+                      <td>Username</td>
+                      <td>{{ user.username }}</td>
+                    </tr>
+                    <tr>
+                        <td>First name</td>
+                        <td>{{ user_profile.first_name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Last name</td>
+                        <td>{{ user_profile.last_name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td>{{ user_profile.email|default_if_none:""}}</td>
+                    </tr>
+                    <tr>
+                        <td>Birth Date</td>
+                        <td>{{ user_profile.birth_date|default_if_none:"" }}</td>
+                    </tr>
+                    <tr>
+                        <td>Country/city</td>
+                        <td>{{ user_profile.city|default_if_none:"" }}</td>
+                    </tr>
+                    <tr>
+                        <td>Phone</td>
+                        <td>{{ user_profile.user_phone|default_if_none:""}}</td>
+                    </tr>
+                </tbody>
+            </table>
 
-
-    <div class="profile_edit">
-            <form method="post" action="{% url 'profile_edit' user.id %}">
-                {% csrf_token %}
-            <p><input type="submit" value="Edit profile"></p>
-            </form>
+        <div class="profile_edit" style="padding-left: 18%">
+            <button type="button" class="btn btn-outline-primary">
+                <a href="{% url 'profile_edit' %}">Edit profile</a>
+            </button>
+{#            <a href="{% url 'profile_edit' %}">Edit profile</a>#}
         </div>
+    </div>
 
 {% endblock %}

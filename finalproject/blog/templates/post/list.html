@@ -1,24 +1,45 @@
 {% extends 'blog/base.html' %}
 {% block title %}Frisbee Time{% endblock %}
 {% block content %}
-    <body>
-    <h1 class="blog">The Blog</h1>
-    {% for post in posts %}
-{#        <div class="shadow p-3 mb-5 bg-white rounded">#}
 
-        <div class="post" >
-            <div class="shadow p-3 mb-5 bg-white rounded" style="text-align: center;">
-        <p>
-            <a href="{% url 'details' post.id %}">{{ post.title }}</a>
-        </p>
-            <p>{{ post.description}}
-                <p><a href="{% url 'details' post.id %}"> Read more </a></p>
-        <p class="date">
-            Published {{ post.published }} by {{ post.user }}
-        </p>
-        </div>
+    <div class="container " style="margin-top:30px">
+        <h2 class="text-center">The Blog</h2>
+            <div class="container">
+                <div class="row">
+                    {% for post in posts %}
+                        <div class="col-sm-6 post text shadow p-4 mb-4 bg-white rounded border border-primary "
+                             style="font-size: 20px; ">
+                            <p class="text-center">
+                            <a class="text-uppercase font-weight-bold" href="{% url 'details' post.id %}">{{ post.title }}
+                            </a></p>
+                            <p>{{ post.description | safe}}</p>
+                            <p class="text-right"><a class="btn text-dark " href="{% url 'details' post.id %}"
+                                                     style="font-size: 20px;">
+                                Read more >>> </a></p>
+                            <p class="date">
+                            Published {{ post.published }} by {{ post.user }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
+    </div>
 
-    {% endfor %}
-    </body>
+        <div class="pagination justify-content-center">
+            <span class="step-links">
+                {% if posts.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ posts.previous_page_number }}">previous</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
+                </span>
+
+                {% if posts.has_next %}
+                    <a href="?page={{ posts.next_page_number }}">next</a>
+                    <a href="?page={{ posts.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+
 {% endblock %}

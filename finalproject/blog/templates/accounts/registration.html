@@ -3,13 +3,35 @@
 {% block title %}Create an account{% endblock %}
 
 {% block content %}
-    <div class="register">
-    <h1>Create an account</h1>
-    <p>Please, sign up using the following form:</p>
-    <form action="." method="post">
-        {{ user_form.as_p }}
-        {% csrf_token %}
-        <p><input type="submit" value="Create my account"></p>
-    </form>
+    <div class="container">
+    <h2 class="text-center" style="font-size: 30px; padding-top: 20px;">Create an account</h2>
+        <p class="text-center" style="font-size: 25px;">Please, sign up using the following form:</p>
+        <form action="." method="post" class="mx-auto" novalidate style="width: 40%;">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username" style="font-size: 20px;">Username:</label>
+                <input type="text" class="form-control" id="username" style=" font-size: 20px;"
+                       placeholder="Enter username" name="username">
+                <label for="first_name" style="font-size: 20px;">First name:</label>
+                <input type="text" class="form-control" id="first_name" style=" font-size: 20px;"
+                       placeholder="Enter first name" name="first_name">
+            </div>
+            <div class="form-group">
+                <label for="email" style="font-size: 20px;">Email:</label>
+                <input type="email" class="form-control" id="email" style="font-size: 20px;"
+                       placeholder="Enter email"name="email">
+                <label for="password" style=" font-size: 20px;">Password:</label>
+                <input type="password" class="form-control" id="password" style="font-size: 20px;"
+                     placeholder="Enter password" name="password">
+                <label for="password2" style=" font-size: 20px;">Repeat password:</label>
+                <input type="password" class="form-control" id="password2" style="font-size: 20px;"
+                     placeholder="Repeat password" name="password2">
+            </div>
+            <div class="form-group text-center">
+                <input type="hidden" name="next" value="{{ next }}">
+                <p><button type="submit" class="btn btn-sm btn-primary">Create my account</button></p>
+            </div>
+        </form>
     </div>
 {% endblock %}
+
